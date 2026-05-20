@@ -76,6 +76,30 @@ void tampilkan_dashboard(const BlokLahan *lahan, int jumlah, int siklus) {
 }
 // --------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------
+// Anang, menghidupkan siklus utama sistem simulasi mikrokontroler
 int main() {
+    srand(time(NULL)); 
+    
+    BlokLahan lahan_sawah[JUMLAH_BLOK]; 
+    
+    int jumlah_siklus_simulasi = 3; 
+
+    printf("=================================================================\n");
+    printf(" Memulai Sistem Irigasi Otomatis Berbasis Cerdas (SDG 2 - Zero Hunger)\n");
+    printf("=================================================================\n");
+    
+    for (int siklus = 1; siklus <= jumlah_siklus_simulasi; siklus++) {
+        
+        generate_data_sensor(lahan_sawah, JUMLAH_BLOK);
+        
+        evaluasi_irigasi(lahan_sawah, JUMLAH_BLOK);
+        
+        tampilkan_dashboard(lahan_sawah, JUMLAH_BLOK, siklus);
+        
+    }
+    
+    printf("\n[INFO] Simulasi selesai. Sistem Smart Farming hemat air sukses diterapkan!\n");
     return 0;
 }
+// ---------------------------------------------------------------------
