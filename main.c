@@ -47,6 +47,35 @@ void evaluasi_irigasi(BlokLahan *lahan, int jumlah) {
 }
 // --------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------
+// Akmal, memanfaatkan pointer untuk efisiensi memori dan mendesain dashboard
+void tampilkan_dashboard(const BlokLahan *lahan, int jumlah, int siklus) {
+    printf("\n=================================================================\n");
+    printf("       DASHBOARD SMART IRRIGASI PADI - SIKLUS KE-%d\n", siklus);
+    printf("=================================================================\n");
+    printf("| %-8s | %-12s | %-15s | %-12s |\n", "Blok", "Suhu (*C)", "Kelembapan (%)", "Status Pompa");
+    printf("-----------------------------------------------------------------\n");
+    
+    for (int i = 0; i < jumlah; i++) {
+        printf("| %-8s | %-12.2f | %-15.2f | ", 
+               (lahan + i)->id_blok, 
+               (lahan + i)->suhu, 
+               (lahan + i)->kelembapan);
+        
+        if ((lahan + i)->status_pompa == 1) {
+            printf("ON (MENYIRAM) |\n"); 
+        } else {
+            printf("OFF (AMAN)    |\n");   
+        }
+    }
+    printf("=================================================================\n");
+    printf("Referensi Agronomi Padi (IRRI/JICA):\n");
+    printf("- Suhu Kritis (Stres Panas) : > %.1f *C\n", BATAS_SUHU_MAKS);
+    printf("- Kelembapan Kritis (Kering): < %.1f %%\n", BATAS_KELEMBAPAN_MIN);
+    printf("=================================================================\n");
+}
+// --------------------------------------------------------------------------
+
 int main() {
     return 0;
 }
